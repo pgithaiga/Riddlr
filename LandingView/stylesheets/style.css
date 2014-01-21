@@ -25,13 +25,11 @@ body {
 }
 
 header {	
-	overflow:auto;
 	padding: 15px 0;
 }
 
 section {
 	clear: both;
-	overflow:auto;
 	padding: 15px 0;
 }
 
@@ -132,6 +130,7 @@ h3 {
 
 #info {
 	margin-top: 10px;
+	margin-bottom: 15px;
 }
 
 #info h1 {
