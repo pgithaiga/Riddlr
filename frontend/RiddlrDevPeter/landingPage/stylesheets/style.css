@@ -1,0 +1,227 @@
+/* --- Local Fonts --- */
+
+@font-face {
+  font-family: 'Huruf Miranti';
+  src: url('fonts/Huruf Miranti.ttf');
+}
+
+/* --- Main --- */
+
+body {
+	font-family: Lato, sans-serif;
+}
+
+.inner {
+	width: 1200px;
+	margin: 0 auto;
+}
+
+.left {
+	float: left;
+}
+
+.right {
+	float: right;
+}
+
+header {	
+	padding: 15px 0;
+}
+
+section {
+	clear: both;
+	padding: 15px 0;
+}
+
+h1 {
+	color: #A60C1F;
+	font-size: 50px;
+	font-family: Huruf Miranti, serif;
+}
+
+#logo {
+	padding-left:10px;
+}
+
+#navigation {
+	margin-top: 15px;
+}
+
+#navigation a {
+	font-size: 20px;
+	font-family: Lato, sans-serif;
+	text-decoration: none;
+}
+	
+	#navigation li {
+		float: left;
+	}
+
+.normal-button {
+	color: #000;
+	font-weight: 300;
+	padding: 25px 20px;
+	
+	-webkit-transition: width 0.7s;
+}
+
+.normal-button:hover {
+	border-top:7px;
+	border-color:#FC7464;
+	border-style:solid;
+}
+	
+.action-button {
+	color: #FC7464;
+	font-weight:700;
+	padding: 15px 20px;
+	
+	-webkit-transition: width 0.7s;
+}
+
+.action-button:hover {
+	color:#FFF;
+	background:#FC7464;
+}
+
+/* --- Section 1 - Banner ---*/
+
+#banner {
+	color: #FFF;
+	font-weight:300;
+	text-align:center;
+	background: #FC7464;
+	padding: 20px 0;
+}
+
+#banner-copy {
+	padding-top: 80px;
+}
+
+#banner img {
+	width:40%;
+	padding: 20px;
+}
+
+h2 {
+	font-size: 35px;
+}
+
+h3 {
+ font-size: 23px;
+}
+
+#fb-signup {
+	color:#FFF;
+	text-decoration:none;
+	font-size: 25px;
+	font-weight: 400;
+
+	border-radius: 8px;
+	background: #3B5999;
+	padding: 15px 20px;
+}
+
+#fb-signup:hover {
+	
+}
+
+/* --- Section 2 - How Riddlr Works --- */
+
+#info {
+	margin-top: 10px;
+	margin-bottom: 15px;
+}
+
+#info h1 {
+	text-align:center;
+	margin-bottom: 30px;
+}
+
+#info p {
+	width: 260px;
+	margin-left: 70px;
+	text-align:center;
+}
+
+.row {
+	float: left;
+	width: 400px;
+}
+
+#search-icon {
+	padding-left: 120px;
+	width: 142px;
+	height: 144px;
+}
+
+#user-icon {
+	padding-left: 130px;
+	width: 142px;
+	height: 144px;
+}
+
+#trophy-icon {
+	padding-left: 130px;
+	width: 142px;
+	height: 144px;
+}
+
+/* --- Section 3 - What people say --- */
+
+#comments {
+	background: #F6F6F6;
+	font-weight:100;
+	padding-bottom: 30px;
+}
+
+#comments h1 {
+	text-align:center;
+	padding-top: 20px;
+	margin-bottom: 30px;
+}
+
+#comment {
+	font-size: 30px;
+	margin-left: 50px;
+}
+
+#comment-details {
+	float: right;
+	margin-right: 50px;
+	text-align:right;
+	color: #64A1A5;
+}
+
+#comments #author {
+	font-size: 25px;
+}
+
+#comments #position {
+	font-size: 15px;
+}
+
+
+/* --- Footer - Team Credits --- */
+
+footer {
+	background: #9B9B9B;
+	color: white;
+	text-align:center;
+	font-weight:100;
+	font-size: 15px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+footer a {
+	text-decoration: none;
+	font-weight:400;
+	color: white;
+}
+
+footer span {
+	color: #F7BD80;
+	font-weight:400;
+}
+	
