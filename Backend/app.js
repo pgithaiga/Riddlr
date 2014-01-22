@@ -91,6 +91,27 @@ app.use(express.static(path.join(__dirname, 'public')));
 if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
+//query testing
+console.log("Start of db stuff");
+// Riddle.find({ } , function (err, items) {
+//     console.log(items); // outputs []
+//     console.log(err); // outputs null
+//     items.forEach( function(item) {
+//         console.log(item); // does not reach this code
+//     });
+// });
+app.get('/test', function(req, res) {
+
+  Riddle.find({ }, function(err, results) {
+    if (err) {console.log(err);}
+    res.send(results);
+  });
+
+});
+//var list = query.sort('solveCount');
+
+console.log("End of db stuff");
+
 
 // routes
 app.get('/', routes.index);

@@ -1,0 +1,68 @@
+doctype html
+html(lang='en')
+head
+    title #{title}
+    meta(http-equiv='content-type', content='text/html')
+    meta(name='author', content='Team Riddlr - @TosinAF, George Ezenna, Peter Githaiga')
+    meta(name='description', content='Riddlr, Local Restaurant Discovery by Solving Riddles')
+    meta(name='keywords', content='riddlr, riddles, mit, iap, 6.470, web programmming competition, food, restaurant discovery')
+    link(rel='shortcut icon', href='/favicon.png', type='image/png')
+    link(href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900', rel='stylesheet', type='text/css')
+    link(href='stylesheets/reset.css', rel='stylesheet', type='text/css')
+    link(href='stylesheets/style.css', rel='stylesheet', type='text/css')
+  body
+    header
+      .inner
+        .left
+          h1#logo Riddlr
+        .right
+          ul#navigation
+            li
+              a.normal-button(href='#') About
+            li
+              a.normal-button(href='#') Submit a Riddle
+            li
+              a.action-button(href='/login') Log In
+        div(style='clear: both;')
+    section#banner
+      .inner
+        img.left(src='images/banner-image.jpg')
+        #banner-copy
+          h2 Find new places to eat in three easy steps
+          br
+          h3 No reviews or reccomendation, just pure spontaneity
+          br
+          br
+          a#fb-signup(href='/signup') Sign up with Facebook
+      div(style='clear: left;')
+    section#info
+      .inner
+        h1 How Riddlr Works
+        .row
+          object#search-icon(type='image/svg+xml', data='images/search.svg')
+            | Your Browser does not support svg
+          p Search our riddles according to what kind of food you'd like to eat.
+        .row
+          object#user-icon(type='image/svg+xml', data='images/facebook.svg')
+            | Your Browser does not support svg
+          p Use the web or collaborate with friends to solve a riddle that interests you.
+        .row
+          object#trophy-icon(type='image/svg+xml', data='images/trophy.svg')
+            | Your Browser does not support svg
+          p Enjoy your well earned meal & check in at the place to gain points.
+        div(style='clear: left;')
+    section#comments
+      .inner
+        h1 What People Say
+        p#comment
+          | Riddlr takes a unique & interesting approach to solving the problem of exploring local restaurants.
+        #comment-details
+          p#author Kim Toy
+          p#position MIT 6.470 IAP Treasurer
+        div(style='clear: right;')
+    footer
+      p
+        | Made with
+        span <3
+        | by George Ezenna, Peter Githaiga &
+        a(href='http://tosinaf.github.io') Tosin Afolabi
