@@ -67,7 +67,7 @@ passport.deserializeUser(function(id, done) {
 // Check if user has been authenticated
 function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) { return next(); }
-  res.redirect('/');
+  res.redirect('/signup');
 }
 
 // Routes
@@ -79,27 +79,21 @@ app.get('/', function(req, res) {
   }
 });
 
-app.get('/landing', function(req, res) {
+app.get('/landing', function(req, res){
   res.render('index');
 });
 
-app.get('/signup', passport.authenticate('facebook', { scope: ['read_stream', 'publish_actions'] }, { failureRedirect: '/' }));
-
-app.get('/redirect', passport.authenticate('facebook', { failureRedirect: '/' }), function(req, res) {
-    res.redirect('/home');
-});
+app.get('/signup', passport.authenticate('facebook', { scope: ['read_stream', 'publish_actions'] }));
 
 app.get('/login', function(req, res) {
-
   User.findById(req.session.passport.user, function(err, user) {
       
-    req.login(user, function(err) {
-      if (err) {
-        console.log(err); }
+      req.login(user, function(err) {
+        if (err) {
+          console.log(err); }
 
-      return res.redirect('/home');
-    });
-
+        return res.redirect('/home');
+      });
   })
 });
   
@@ -112,10 +106,12 @@ app.get('/home', ensureAuthenticated, function(req, res) {
 	    } else {
 	      queries.loadRiddles(req,res,user);
 	    }
-
 	})
 });
 
+app.get('/redirect', passport.authenticate('facebook', { failureRedirect: '/' }), function(req, res) {
+    res.redirect('/home');
+});
 
 app.get('/testpost', ensureAuthenticated, function(req, res) {
   User.findById(req.session.passport.user, function(err, user) {
@@ -126,7 +122,7 @@ app.get('/testpost', ensureAuthenticated, function(req, res) {
 
       console.log(user.accessToken);
       FB.setAccessToken(user.accessToken);
-      var body = 'My first post using facebook-node-sdk, and another post';
+      var body = 'A post using facebook-node-sdk, i promise this is the last one lol';
       FB.api('me/feed', 'post', { message: body}, function (res) {
         if(!res || res.error) {
           console.log(!res ? 'error occurred' : res.error);

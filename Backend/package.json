@@ -1,7 +1,9 @@
 {
-  "name": "application-name",
+  "name": "Riddlr",
   "version": "0.0.1",
   "private": true,
+  "engines": { "node": "0.10.x" },
+  "subdomian" : "riddlr",
   "scripts": {
     "start": "node app.js"
   },
