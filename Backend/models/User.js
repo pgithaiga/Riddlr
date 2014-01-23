@@ -5,6 +5,7 @@ var UserSchema = new Schema({
     oauthID : Number,
     name : String,
     created : Date,
+    email : String,
 	points : Number,
 	riddlesSolved : Array,
 	solveCount : Number,

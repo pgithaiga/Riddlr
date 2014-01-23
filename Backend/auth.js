@@ -13,6 +13,7 @@ passport.use(new FacebookStrategy({
     clientID: config.facebook.clientID,
     clientSecret: config.facebook.clientSecret,
     callbackURL: config.facebook.callbackURL
+    //callbackURL: config.facebook.callbackURLLocal
   },
 
   function(accessToken, refreshToken, profile, done) {
@@ -29,8 +30,10 @@ passport.use(new FacebookStrategy({
       var user = new User({
         oauthID : profile.id,
         name    : profile.displayName,
+        email   : profile.emails[0].value,
         created : Date.now(),
-        points  : 200
+        points  : 200,
+        solveCount : 4
       });
 
       user.save(function(err) {

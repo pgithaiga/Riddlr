@@ -9,6 +9,30 @@ var config = require('./config');
 var queries = require('./queries');
 var FB = require('fb');
 
+var nodemailer = require("nodemailer");
+var congratsEmail = function(email){
+  var smtpTransport = nodemailer.createTransport("SMTP",{
+     service: "Gmail",
+     auth: {
+         user: "tosman9000@gmail.com",
+         pass: "opebino5"
+     }
+  });
+  //Send an e-mail using the connection object
+  smtpTransport.sendMail({
+     from: "George <georgeezenna@gmail.com>", // sender address
+     to: "User <"+email+">", // comma separated list of receivers
+     subject: "Congratulations", // Subject line
+     text: "You solved the riddle correctly!" // plaintext body
+  }, function(error, response){
+     if(error){
+         console.log(error);
+     }else{
+         console.log("Message sent: " + response.message);
+     }
+  });
+};
+
 // Required Files
 require('./models/User')
 require('./models/Riddle')
@@ -20,7 +44,8 @@ var User = mongoose.model("User");
 var Riddle = mongoose.model("Riddle");
 
 var app = express();
-var db = mongoose.connect('mongodb://localhost/Riddlr');
+//var db = mongoose.connect('mongodb://localhost/Riddlr');
+var db = mongoose.connect('mongodb://nodejitsu:9b291c2b19339cdf6ea45937347c1842@troup.mongohq.com:10043/nodejitsudb8011386150');
 
 app.configure(function() {
 	app.set('port', process.env.PORT || 3000);
@@ -75,7 +100,7 @@ app.get('/', function(req, res) {
   if (req.isAuthenticated()) {
     res.redirect('/home');
   } else {
-    res.render('index');
+    res.render('index', { title: 'Express' });
   }
 });
 
@@ -83,7 +108,32 @@ app.get('/landing', function(req, res){
   res.render('index');
 });
 
-app.get('/signup', passport.authenticate('facebook', { scope: ['read_stream', 'publish_actions'] }));
+app.get('/testresponse', function(req, res) {
+  console.log("facebook called us");
+  res.send("done");
+});
+
+app.get('/subscription', function(req, res) {
+  
+  var verifyToken = config.facebook.verifyToken;
+  var hub_mode = req.param('hub.mode');
+  var hub_verify_token = req.param('hub.verify_token');
+
+  if ( hub_mode === "subscribe" && hub_verify_token === verifyToken ) {
+    res.send(req.param('hub.challenge'));
+  } else {
+    res.send("error");
+  }
+
+});
+
+app.post('/subscription', function(req, res) {
+
+  console.log(req.body.entry[0].id);
+  res.send(req.body.entry[0]);
+});
+
+app.get('/signup', passport.authenticate('facebook', { scope: ['read_stream', 'email'] }));
 
 app.get('/login', function(req, res) {
   User.findById(req.session.passport.user, function(err, user) {
