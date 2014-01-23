@@ -2,11 +2,12 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var UserSchema = new Schema({
-    oauthID   : String,
+    oauthID : Number,
     name : String,
-    email : String,
     created : Date,
-	points : Number
+	points : Number,
+	riddlesSolved : Array,
+	solveCount : Number
 });
 
 var User = mongoose.model("User", UserSchema);

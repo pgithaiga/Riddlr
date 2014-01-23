@@ -1,8 +1,14 @@
 /* --- Local Fonts --- */
 
 @font-face {
-  font-family: 'Huruf Miranti';
-  src: url('fonts/Huruf Miranti.ttf');
+    font-family: 'huruf_mirantiregular';
+    src: url('fonts/huruf_miranti-webfont.eot');
+    src: url('fonts/huruf_miranti-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/huruf_miranti-webfont.woff') format('woff'),
+         url('fonts/huruf_miranti-webfont.ttf') format('truetype'),
+         url('fonts/huruf_miranti-webfont.svg#huruf_mirantiregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
 }
 
 /* --- Main --- */
@@ -25,20 +31,18 @@ body {
 }
 
 header {	
-	overflow:auto;
 	padding: 15px 0;
 }
 
 section {
 	clear: both;
-	overflow:auto;
 	padding: 15px 0;
 }
 
 h1 {
 	color: #A60C1F;
 	font-size: 50px;
-	font-family: Huruf Miranti, serif;
+	font-family: 'huruf_mirantiregular', sans-serif;
 }
 
 #logo {
@@ -132,6 +136,7 @@ h3 {
 
 #info {
 	margin-top: 10px;
+	margin-bottom: 15px;
 }
 
 #info h1 {

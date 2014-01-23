@@ -1,17 +1,18 @@
 
 // Module Dependencies
 var express = require('express');
+var routes = require('./routes');
+var user = require('./routes/user');
 var http = require('http');
 var path = require('path');
 var passport = require('passport')
 var FacebookStrategy = require('passport-facebook').Strategy;
-var config = require('./config');
-var queries = require('./queries');
+var config = require('./config')
 
 // Required Files
 require('./models/User')
 require('./models/Riddle')
-require('./auth')
+//require('./auth')
 
 // Database
 var mongoose = require('mongoose');
@@ -19,13 +20,12 @@ var User = mongoose.model("User");
 var Riddle = mongoose.model("Riddle");
 
 var app = express();
-var db = mongoose.connect('mongodb://localhost/Riddlr');
+var db = mongoose.createConnection('localhost', 'Riddlr');
 
 app.configure(function() {
 	app.set('port', process.env.PORT || 3000);
 	app.set('views', path.join(__dirname, 'views'));
 	app.set('view engine', 'jade');
-  app.locals.pretty = true;
 	app.use(express.favicon());
 	app.use(express.logger('dev'));
 	app.use(express.json());
@@ -45,9 +45,37 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-// Querying the Database
-
-
+// auth strategy -- should be in another file
+passport.use(new FacebookStrategy({
+    clientID: config.facebook.clientID,
+    clientSecret: config.facebook.clientSecret,
+    callbackURL: config.facebook.callbackURL
+  },
+  function(accessToken, refreshToken, profile, done) {
+  User.findOne({ oauthID: profile.id }, function(err, user) {
+    if(err) { console.log(err); }
+    if (!err && user != null) {
+      done(null, user);
+    } else {
+      var user = new User({
+        oauthID: profile.id,
+        name: profile.displayName,
+        email: profile.emails[0].value,
+        created: Date.now(),
+        points : 200
+      });
+      user.save(function(err) {
+        if(err) { 
+          console.log(err); 
+        } else {
+          console.log("saving user ...");
+          done(null, user);
+        };
+      });
+    };
+  });
+}
+));
 
 // Serializing & Deserializing Users for User Seissions
 passport.serializeUser(function(user, done) {
@@ -66,57 +94,47 @@ passport.deserializeUser(function(id, done) {
 // Check if user has been authenticated
 function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) { return next(); }
-  res.redirect('/signup');
+  res.redirect('/')
 }
 
 // Routes
-app.get('/', function(req, res) {
-  if (req.isAuthenticated()) {
-    res.redirect('/home');
-  } else {
-    res.render('index', { title: 'Express' });
-  }
+app.get('/', routes.index);
+
+/*
+app.get('/signup', passport.authenticate('facebook'), function(req, res){
+	
 });
 
-app.get('/test', queries.trendingRiddles);
+app.get('/login', passport.authenticate('facebook'), function(req, res){
 
-app.get('/signup', passport.authenticate('facebook'));
-
-app.get('/login', function(req, res) {
-  User.findById(req.session.passport.user, function(err, user) {
-      
-      req.login(user, function(err) {
-        if (err) {
-          console.log(err); }
-
-        return res.redirect('/home');
-      });
-  })
 });
-  
+
 app.get('/home', ensureAuthenticated, function(req, res) {
 	
 	User.findById(req.session.passport.user, function(err, user) {
 	    
 	    if(err) { 
 	      console.log(err); 
+	    
 	    } else {
-	      queries.loadRiddles(req,res,user);
+	      res.send(user.name + " " + user.email);
 	    }
 	})
 });
 
-app.get('/redirect', passport.authenticate('facebook', { failureRedirect: '/' }), function(req, res) {
+app.get('/auth/facebook', passport.authenticate('facebook', { failureRedirect: '/' }),
+  function(req, res) {
     res.redirect('/home');
 });
+*/
 
-app.get('/logout', function(req, res) {
-
-  // logout dosent work properly yet
-  req.logout();
-  res.send("log out done");
+app.get('/auth/facebook',
+  passport.authenticate('facebook'),
+  function(req, res){
+  });
+app.get('/auth/facebook/callback', function(req, res) {
+	res.send("facebook login succes");
 });
-
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

@@ -1,7 +1,7 @@
 doctype html
 html(lang='en')
 head
-    title Riddlr
+    title #{title}
     meta(http-equiv='content-type', content='text/html')
     meta(name='author', content='Team Riddlr - @TosinAF, George Ezenna, Peter Githaiga')
     meta(name='description', content='Riddlr, Local Restaurant Discovery by Solving Riddles')
@@ -22,17 +22,19 @@ head
             li
               a.normal-button(href='#') Submit a Riddle
             li
-              a.action-button(href='/auth/facebook') Log In
+              a.action-button(href='/login') Log In
+        div(style='clear: both;')
     section#banner
       .inner
         img.left(src='images/banner-image.jpg')
         #banner-copy
           h2 Find new places to eat in three easy steps
           br
-          h3 No reviews or reccomentdations, just pure spontaineity
+          h3 No reviews or reccomendation, just pure spontaneity
           br
           br
-          a#fb-signup(href='#') Sign up with Facebook
+          a#fb-signup(href='/signup') Sign up with Facebook
+      div(style='clear: left;')
     section#info
       .inner
         h1 How Riddlr Works
@@ -43,11 +45,12 @@ head
         .row
           object#user-icon(type='image/svg+xml', data='images/facebook.svg')
             | Your Browser does not support svg
-          p Use the web or collaborate with friends to solve a riddle that intrests you.
+          p Use the web or collaborate with friends to solve a riddle that interests you.
         .row
           object#trophy-icon(type='image/svg+xml', data='images/trophy.svg')
             | Your Browser does not support svg
           p Enjoy your well earned meal & check in at the place to gain points.
+        div(style='clear: left;')
     section#comments
       .inner
         h1 What People Say
@@ -56,9 +59,10 @@ head
         #comment-details
           p#author Kim Toy
           p#position MIT 6.470 IAP Treasurer
+        div(style='clear: right;')
     footer
       p
         | Made with
-        span <3
-        | by George Ezenna, Peter Githaiga &
+        span  <3
+        |  by George Ezenna, Peter Githaiga &
         a(href='http://tosinaf.github.io') Tosin Afolabi

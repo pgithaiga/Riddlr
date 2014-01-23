@@ -6,7 +6,11 @@ var Riddle = new Schema({
 	content: String,
 	type : String,
 	answerText : String,
-	answerCoords : String
+	answerCoords : String,
+	clue : String,
+	solvedBy : Array,
+	solveCount : Number,
+	value : Number
 });
 
 mongoose.model('Riddle', Riddle);
