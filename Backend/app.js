@@ -7,6 +7,7 @@ var passport = require('passport')
 var FacebookStrategy = require('passport-facebook').Strategy;
 var config = require('./config');
 var queries = require('./queries');
+var FB = require('fb');
 
 // Required Files
 require('./models/User')
@@ -66,7 +67,7 @@ passport.deserializeUser(function(id, done) {
 // Check if user has been authenticated
 function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) { return next(); }
-  res.redirect('/signup');
+  res.redirect('/');
 }
 
 // Routes
@@ -74,23 +75,31 @@ app.get('/', function(req, res) {
   if (req.isAuthenticated()) {
     res.redirect('/home');
   } else {
-    res.render('index', { title: 'Express' });
+    res.render('index');
   }
 });
 
-app.get('/test', queries.trendingRiddles);
+app.get('/landing', function(req, res) {
+  res.render('index');
+});
 
-app.get('/signup', passport.authenticate('facebook'));
+app.get('/signup', passport.authenticate('facebook', { scope: ['read_stream', 'publish_actions'] }, { failureRedirect: '/' }));
+
+app.get('/redirect', passport.authenticate('facebook', { failureRedirect: '/' }), function(req, res) {
+    res.redirect('/home');
+});
 
 app.get('/login', function(req, res) {
+
   User.findById(req.session.passport.user, function(err, user) {
       
-      req.login(user, function(err) {
-        if (err) {
-          console.log(err); }
+    req.login(user, function(err) {
+      if (err) {
+        console.log(err); }
 
-        return res.redirect('/home');
-      });
+      return res.redirect('/home');
+    });
+
   })
 });
   
@@ -103,11 +112,31 @@ app.get('/home', ensureAuthenticated, function(req, res) {
 	    } else {
 	      queries.loadRiddles(req,res,user);
 	    }
+
 	})
 });
 
-app.get('/redirect', passport.authenticate('facebook', { failureRedirect: '/' }), function(req, res) {
-    res.redirect('/home');
+
+app.get('/testpost', ensureAuthenticated, function(req, res) {
+  User.findById(req.session.passport.user, function(err, user) {
+      
+    if(err) { 
+      console.log(err); 
+    } else {
+
+      console.log(user.accessToken);
+      FB.setAccessToken(user.accessToken);
+      var body = 'My first post using facebook-node-sdk, and another post';
+      FB.api('me/feed', 'post', { message: body}, function (res) {
+        if(!res || res.error) {
+          console.log(!res ? 'error occurred' : res.error);
+          return;
+         }
+        console.log('Post Id: ' + res.id);
+      });
+      res.send("post succed");
+    }
+  })
 });
 
 app.get('/logout', function(req, res) {

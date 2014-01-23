@@ -30,7 +30,8 @@ exports.loadRiddles = function(req,res,user){
 			riddleContent.push(riddle.content);
 		})
       
-      	res.render('home', { 
+      	res.render('home', {
+      	  riddleDB : docs,
 	      riddleNames: riddleNames,
 	      riddleContent: riddleContent,
 	      riddleTypes : riddleTypes,

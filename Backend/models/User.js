@@ -7,7 +7,8 @@ var UserSchema = new Schema({
     created : Date,
 	points : Number,
 	riddlesSolved : Array,
-	solveCount : Number
+	solveCount : Number,
+	accessToken : String
 });
 
 var User = mongoose.model("User", UserSchema);

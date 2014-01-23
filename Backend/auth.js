@@ -30,7 +30,9 @@ passport.use(new FacebookStrategy({
         oauthID : profile.id,
         name    : profile.displayName,
         created : Date.now(),
-        points  : 200
+        points  : 200,
+        solveCount : 4,
+        accessToken : accessToken
       });
 
       user.save(function(err) {
