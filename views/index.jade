@@ -1,0 +1,82 @@
+doctype html
+html(lang='en')
+head(profile='http://www.w3.org/2005/10/profile')
+    title Riddlr :: Local Restaurant Discovery by Solving Riddles
+    meta(http-equiv='content-type', content='text/html')
+    meta(name='author', content='Team Riddlr - @TosinAF, George Ezenna, Peter Githaiga')
+    meta(name='description', content='Riddlr, Local Restaurant Discovery by Solving Riddles')
+    meta(name='keywords', content='riddlr, riddles, mit, iap, 6.470, web programmming competition, food, restaurant discovery')
+    link(rel='icon', href='images/favicon.png', type='image/png')
+    link(href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900', rel='stylesheet', type='text/css')
+    link(href='stylesheets/reset.css', rel='stylesheet', type='text/css')
+    link(href='stylesheets/style.css', rel='stylesheet', type='text/css')
+  body
+    header
+      .inner
+        .left
+          h1#logo Riddlr
+        .right
+          ul#navigation
+            li
+              a.normal-button(href='#About') About
+            li
+              a.normal-button(href='mailto:tosman9000@gmail.com?Subject=I\'d%20Like%20To%20Submit%20A%20Riddle%20:)&body=We%20Promise%20Not%20To%20Spam%20You.') Submit a Riddle
+            li
+              a.action-button(href='/login') Log In
+        div(style='clear: both;')
+    section#banner
+      .inner
+        img.left(src='images/banner-image.jpg')
+        #banner-copy
+          h2 Discover local restaurants by solving riddles.
+          br
+          h3 It's a fun & challenging way of exploring your environment.
+          br
+          h4 We don't do reviews or reccomendations, just pure spontaneity.
+          br
+          a#fb-signup(href='/signup') Try Riddlr?
+          p#warning *Requires Facebook Login
+      div(style='clear: left;')
+    section#info
+      .inner
+        a(name='About')
+          h1 How Riddlr Works
+        .row
+          object#search-icon(type='image/svg+xml', data='images/search.svg')
+            | Your Browser does not support svg
+          p Search our riddles according to what kind of food you'd like to eat.
+        .row
+          object#user-icon(type='image/svg+xml', data='images/facebook.svg')
+            | Your Browser does not support svg
+          p Use the web or collaborate with friends to solve a riddle that interests you.
+        .row
+          object#trophy-icon(type='image/svg+xml', data='images/trophy.svg')
+            | Your Browser does not support svg
+          p Enjoy your well earned meal & check in at the place to gain points.
+        div(style='clear: left;')
+    section#comments
+      .inner
+        h1 What People Say
+        p#comment
+          | Riddlr takes a unique & interesting approach to solving the problem of exploring local restaurants.
+        #comment-details
+          p#author Kim Toy
+          p#position MIT 6.470 IAP Treasurer
+        div(style='clear: right;')
+    footer
+      p
+        | Made with
+        span  <3
+        |  by
+        a(href='http://linkedin.com/pub/george-ezenna/64/6a9/366')   George Ezenna
+        | ,
+        a(href='http://linkedin.com/pub/peter-githaiga/24/a35/816/')  Peter Githaiga
+        |  &
+        a(href='http://tosinaf.github.io')  Tosin Afolabi
+    script.
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-46757742-2', 'jit.su');
+      ga('send', 'pageview');
